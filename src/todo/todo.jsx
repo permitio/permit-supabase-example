@@ -17,162 +17,180 @@ export default function Todo({supabase}) {
   const todoRef = useRef();
   const editTodoRef = useRef();
 
-//   useEffect(() => {
-//     getUserData();
-//   } , [])
+  const AuthHeader = import.meta.env.VITE_AUTH_HEADER_SUPBASE
+
+  // useEffect(() => {
+  //   getUserData();
+  // } , [])
   
 
-//   async function getUserData () {
+  // async function getUserData () {
 
     
-//     const { data: users, error } = await supabase.from("profiles").select("*");
+  //   const { data: users, error } = await supabase.from("profiles").select("*");
 
-//     console.log(users , error);
-//   };
+  //   console.log(users , error);
+  // };
 
-//   useEffect(() => {
+  // useEffect(() => {
 
-//     getTodoData();
+  //   getTodoData();
       
-//   }, [refreshTodoData]);
+  // }, [refreshTodoData]);
 
-//   useEffect(() => {
+  // useEffect(() => {
 
-//     const session = localStorage.getItem("session");
-//     if(session) setSession(session);
-//     console.log(session , 'session');
+  //   const session = localStorage.getItem("session");
+  //   if(session) setSession(session);
+  //   console.log(session , 'session');
 
-//   } , []);
+  // } , []);
 
-//   useEffect(() => {
-//     if(session){
-//       const decoded = jwtDecode(session);  
-//       setId(decoded.sub);  
-//       setEmail(decoded.email)
-//       console.log(decoded);
-//       console.log(decoded.email);
-//     }
-//   } , [session]);
+  // useEffect(() => {
+  //   if(session){
+  //     const decoded = jwtDecode(session);  
+  //     setId(decoded.sub);  
+  //     setEmail(decoded.email)
+  //     console.log(decoded);
+  //     console.log(decoded.email);
+  //   }
+  // } , [session]);
   
-//   async function logout(){
-//     const { error } = await supabase.auth.signOut()
-//     console.log(error);
+  // async function logout(){
+  //   const { error } = await supabase.auth.signOut()
+  //   console.log(error);
 
-//     localStorage.removeItem("session");
-//     setSession(null);
+  //   localStorage.removeItem("session");
+  //   setSession(null);
 
-//   }
+  // }
 
-//   async function getTodoData(){
+  // async function getTodoData(){
           
             
-//       let { data: TODOS, error } = await supabase
-//       .from('TODOS')
-//       .select('*')
+  //     let { data: TODOS, error } = await supabase
+  //     .from('TODOS')
+  //     .select('*')
 
       
-//       setTodoList(TODOS);
+  //     setTodoList(TODOS);
 
-//       console.log(error);
-//       console.log(TODOS);
-//       return ;              
-//   }
+  //     console.log(error);
+  //     console.log(TODOS);
+  //     return ;              
+  // }
 
-//   async function createTodo(todo){
+  // async function createTodo(todo){
 
 
-//     if(todo.trim() !== ""){
+  //   if(todo.trim() !== ""){
 
-//       const res = await fetch(`http://localhost:3000/check-permission/${id}/create`)
+  //     const res = await fetch(`http://localhost:54321/functions/v1/check-permission/${id}/create`, {
+  //         headers: {
+  //           "Authorization" : `Bearer ${AuthHeader}`
+  //         }
+  //     })
     
-//       const response = await res.json();
-//       if(response.status === "permitted"){
-//           setCreatingState(true);
-//           inputRef.current.value = "creating...";
+  //     const response = await res.json();
+  //     if(response.status === "permitted"){
+  //         setCreatingState(true);
+  //         inputRef.current.value = "creating...";
         
-//         const { error } = await supabase
-//         .from('TODOS')
-//         .insert({ todo : todo})
+  //       const { error } = await supabase
+  //       .from('TODOS')
+  //       .insert({ todo : todo})
 
-//         console.log(error);
-//         if(!error){
-//           inputRef.current.value = "";
-//           setCreatingState(false);
-//           setRefreshTodoData(true);
-//         }
-//       }
+  //       console.log(error);
+  //       if(!error){
+  //         inputRef.current.value = "";
+  //         setCreatingState(false);
+  //         setRefreshTodoData(true);
+  //       }
+  //     }
   
-//     }
+  //   }
 
-//   }
+  // }
 
-//   async function markAsDone(todo_id){
+  // async function markAsDone(todo_id){
       
-//       const res = await fetch(`http://localhost:3000/check-permission/${id}/update`)
+  //     const res = await fetch(`http://localhost:54321/functions/v1/check-permission/${id}/update`, {
+  //       headers: {
+  //         "Authorization" : `Bearer ${AuthHeader}`
+  //       }
+  //   })
       
-//       const response = await res.json();
-//       if(response.status === "permitted"){
+  //     const response = await res.json();
+  //     if(response.status === "permitted"){
         
-//         const { error } = await supabase
-//         .from('TODOS')
-//         .update({ isdone: true })
-//         .eq('id', todo_id);
+  //       const { error } = await supabase
+  //       .from('TODOS')
+  //       .update({ isdone: true })
+  //       .eq('id', todo_id);
 
 
-//         console.log(error);
-//         if(!error){
-//           setRefreshTodoData(true);
-//         }
-//       }
-//   }
+  //       console.log(error);
+  //       if(!error){
+  //         setRefreshTodoData(true);
+  //       }
+  //     }
+  // }
 
-//   async function editTodo(todo_id){
+  // async function editTodo(todo_id){
       
-//       const res = await fetch(`http://localhost:3000/check-permission/${id}/update`)
+  //     const res = await fetch(`http://localhost:54321/functions/v1/check-permission/${id}/update`, {
+  //       headers: {
+  //         "Authorization" : `Bearer ${AuthHeader}`
+  //       }
+  //   })
         
-//         const response = await res.json();
-//         if(response.status === "permitted"){
+  //       const response = await res.json();
+  //       if(response.status === "permitted"){
           
-//           todoRef.current.value = "";
-//           setUpdatingTodo({id : todo_id});
+  //         todoRef.current.value = "";
+  //         setUpdatingTodo({id : todo_id});
           
-//         }
-//   } 
+  //       }
+  // } 
 
-//   async function saveChanges(todo_id , todo_value){
-//         const { error } = await supabase
-//           .from('TODOS')
-//           .update({ todo : todo_value})
-//           .eq('id', todo_id);
-
-
-//           console.log(error);
-//           if(!error){
-//             setUpdatingTodo({id : null});
-//             setRefreshTodoData(true);
-//           }
-//   }
+  // async function saveChanges(todo_id , todo_value){
+  //       const { error } = await supabase
+  //         .from('TODOS')
+  //         .update({ todo : todo_value})
+  //         .eq('id', todo_id);
 
 
-//   async function deleteTodo(todo_id){
+  //         console.log(error);
+  //         if(!error){
+  //           setUpdatingTodo({id : null});
+  //           setRefreshTodoData(true);
+  //         }
+  // }
+
+
+  // async function deleteTodo(todo_id){
       
-//       const res = await fetch(`http://localhost:3000/check-permission/${id}/delete`)
+  //     const res = await fetch(`http://localhost:54321/functions/v1/check-permission/${id}/delete`, {
+  //       headers: {
+  //         "Authorization" : `Bearer ${AuthHeader}`
+  //       }
+  //   })
       
-//       const response = await res.json();
-//       if(response.status === "permitted"){
+  //     const response = await res.json();
+  //     if(response.status === "permitted"){
         
-//         const { error } = await supabase
-//         .from('TODOS')
-//         .delete()
-//         .eq('id', todo_id);
+  //       const { error } = await supabase
+  //       .from('TODOS')
+  //       .delete()
+  //       .eq('id', todo_id);
 
 
-//         console.log(error);
-//         if(!error){
-//           setRefreshTodoData(true);
-//         }
-//       }
-//   }
+  //       console.log(error);
+  //       if(!error){
+  //         setRefreshTodoData(true);
+  //       }
+  //     }
+  // }
 
 
   return (

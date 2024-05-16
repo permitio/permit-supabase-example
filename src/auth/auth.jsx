@@ -1,10 +1,12 @@
 import '../App.css'
 import { useState, useEffect , useRef} from 'react'
 import { useNavigate } from 'react-router-dom';
+import { createClient } from '@supabase/supabase-js'
 
+export default function Auth() {
+  const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
 
-export default function Auth({supabase}) {
-
+  const AuthHeader = import.meta.env.VITE_AUTH_HEADER_SUPBASE;
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error , setError] = useState(null);
@@ -14,7 +16,8 @@ export default function Auth({supabase}) {
   }
   const navigate = useNavigate();
   
-    // const signup = async (email , password) => {
+
+  // const signup = async (email , password) => {
     
   //   const { data, error } = await supabase.auth.signUp({
   //     email: email ,
@@ -24,25 +27,30 @@ export default function Auth({supabase}) {
   //     },
   //   })
 
-  //   console.log(data);
-  //   console.log(data.session , data.user);
-
   //   if(data.session) {
-      
+     
   //     try{
-  //       const res = await fetch("http://localhost:3000/create-tenant" , {
-  //         method : "POST",
-  //         headers : {
-  //           "Content-Type" : "application/json"
-  //         },
-  //         body: JSON.stringify({
-  //            data : data
-  //         })
+
+  //       const res = await fetch("http://127.0.0.1:54321/functions/v1/createUser" , {
+  //               mode: "cors",
+  //               method: "POST",
+  //               headers: {
+  //                   "Content-Type" : "application/json",
+  //                   "Authorization" : `Bearer ${AuthHeader}`
+  //                 }, 
+  //               body : JSON.stringify({
+  //                   data: {
+  //                       user : {
+  //                           id : data.user.id,
+  //                           email : data.user.email
+  //                   }}
+  //               })
   //       })
+          
+       
         
   //       const response = await res.json();
-  //       console.log(response);
-  
+
   //       if(res.status === 200){
   //           localStorage.setItem("session" , data.session.access_token)
   //           navigate('/');
@@ -55,13 +63,10 @@ export default function Auth({supabase}) {
       
   //   };
     
-  //   console.log(error);
   // }
 
   // const signin = async (email , password) => {
     
-  //   console.log(email , password)
-
   //   const { data, error } = await supabase.auth.signInWithPassword({
   //     email: emailRef.current.value,
   //     password: passwordRef.current.value,
@@ -72,9 +77,6 @@ export default function Auth({supabase}) {
   //     localStorage.setItem("session" , data.session.access_token)
   //     navigate('/');
   //   };
-    
-  //   console.log(data.session);
-  //   console.log(error);
     
   // }
 
@@ -97,14 +99,14 @@ export default function Auth({supabase}) {
                 <input className='email-box' ref={emailRef} type="email" placeholder='email' required/>
                 <input className="password-box" ref={passwordRef} type="password" placeholder='password' required />
                 <button className="submit-btn"  type="submit" onClick={() => {
-                //   if(emailRef.current.value && passwordRef.current.value) signup(emailRef.current.value , passwordRef.current.value)
+                  // if(emailRef.current.value && passwordRef.current.value) signup(emailRef.current.value , passwordRef.current.value)
                 }}>
                   Sign up
                 </button>
                 <span className="sign-anchor" onClick={() => {
                   setActiveTab("signin")
                 }}>already have an account ? signin</span>
-                {/* {error ? <span style={{padding: "20px 20px 10px 20px" , fontSize: "13px" , color : "red"}}>{String(error) } ! please try again</span> : null} */}
+                {/* { error ? <span style={{padding: "20px 20px 10px 20px" , fontSize: "13px" , color : "red"}}>{String(error) } ! please try again</span> : null} */}
               </section>
               : 
               
@@ -112,7 +114,7 @@ export default function Auth({supabase}) {
                 <input className='email-box' ref={emailRef} type="email" placeholder='email' required/>
                 <input className="password-box" ref={passwordRef} type="password" placeholder='password' required />
                 <button className="submit-btn" type="submit" onClick={() => {
-                //   if(emailRef.current.value && passwordRef.current.value) signin(emailRef.current.value , passwordRef.current.value)
+                  // if(emailRef.current.value && passwordRef.current.value) signin(emailRef.current.value , passwordRef.current.value)
                 }}>
                   Sign in
                 </button>
