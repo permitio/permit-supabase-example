@@ -1,1 +1,2 @@
-#### This is starter code for todo application with supabase and permit.io
+# An application example for RBAC in Supabase
+Read more here: https://www.permit.io/blog/how-to-implement-rbac-in-supabase
